@@ -32,7 +32,7 @@ class Developer extends Employee {
         return hours * 500;
     }
 }
-public class Q1Test {
+public class EmployeeTest {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter Manager name id bonus: ");

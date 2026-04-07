@@ -13,7 +13,7 @@ class Bus extends PublicTransport {
         return 20.0;
     }
 }
-public class Q3Test {
+public class TransportTest {
     public static void main(String[] args) {
         PublicTransport b = new Bus();
         b.move();

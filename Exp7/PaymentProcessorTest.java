@@ -23,7 +23,7 @@ class PaymentProcessor {
         return "User: " + user;
     }
 }
-public class Q1Test {
+public class PaymentProcessorTest {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter user name: ");

@@ -16,7 +16,7 @@ class AirConditioner extends Appliance implements RemoteControl {
         System.out.println("Cooling started");
     }
 }
-public class Q4Test {
+public class RemoteControlTest {
     public static void main(String[] args) {
         AirConditioner ac = new AirConditioner();
         Appliance.applianceType();  // static method

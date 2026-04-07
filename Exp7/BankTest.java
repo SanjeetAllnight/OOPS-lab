@@ -33,7 +33,7 @@ class ICICI extends Bank {
         return 7.2;
     }
 }
-public class Q2Test {
+public class BankTest {
     public static void main(String[] args) {
         Bank b1 = new SBI();
         Bank b2 = new HDFC();

@@ -15,7 +15,7 @@ class VideoPlayer extends MediaPlayer {
         System.out.println("Playing video");
     }
 }
-public class Q3Test {
+public class MediaPlayerTest {
     public static void main(String[] args) {
         MediaPlayer[] arr = new MediaPlayer[2];
         arr[0] = new AudioPlayer();

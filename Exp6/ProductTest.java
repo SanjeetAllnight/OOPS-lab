@@ -25,7 +25,7 @@ class ElectronicProduct extends Product {
         System.out.println("Brand: " + brand + " Warranty: " + warrantyPeriod);
     }
 }
-public class Q1Test {
+public class ProductTest {
     public static void main(String[] args) {
         ElectronicProduct e = new ElectronicProduct(1, "Laptop", 50000, 2, "Dell");
         e.displayElectronicProduct();

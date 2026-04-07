@@ -34,7 +34,7 @@ class Intern extends Employee {
         return basicSalary + 2000;
     }
 }
-public class Q3Test {
+public class EmployeeTest {
     public static void main(String[] args) {
         Employee[] arr = new Employee[3];
         arr[0] = new Developer("A", 30000);

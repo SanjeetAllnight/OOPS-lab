@@ -15,7 +15,7 @@ class UPIPayment extends Payment {
         System.out.println("Paid using UPI");
     }
 }
-public class Q2Test {
+public class PaymentTest {
     public static void main(String[] args) {
         Payment p1 = new CreditCardPayment();
         Payment p2 = new UPIPayment();

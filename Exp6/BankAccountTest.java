@@ -27,7 +27,7 @@ class FixedDepositAccount extends BankAccount {
         return balance * 0.07;
     }
 }
-public class Q4Test {
+public class BankAccountTest {
     public static void main(String[] args) {
         BankAccount b1 = new SavingsAccount(1, 10000);
         BankAccount b2 = new FixedDepositAccount(2, 20000);

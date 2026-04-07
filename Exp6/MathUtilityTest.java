@@ -7,7 +7,7 @@ final class MathUtility {
         return n * n * n;
     }
 }
-public class Q5Test {
+public class MathUtilityTest {
     public static void main(String[] args) {
         MathUtility m = new MathUtility();
         System.out.println("Square: " + m.square(5));

@@ -34,7 +34,7 @@ class Clothing extends Product {
         return price * 0.20;
     }
 }
-public class Q4Test {
+public class ProductTest {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Product[] arr = new Product[2];

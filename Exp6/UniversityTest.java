@@ -30,7 +30,7 @@ class Student extends Department {
         System.out.println("ID: " + studentId + " Course: " + course);
     }
 }
-public class Q2Test {
+public class UniversityTest {
     public static void main(String[] args) {
         Student s = new Student("SPPU", "Pune", "Comp", 20, 101, "BE");
         s.display();
