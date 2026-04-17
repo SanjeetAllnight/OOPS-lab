@@ -1,25 +1,46 @@
 package Exp8;
+import java.util.Scanner;
+
 interface RemoteControl {
     void turnOn();
 }
+
 abstract class Appliance {
+
     public static void applianceType() {
-        System.out.println("Appliance device");
+        System.out.println("Appliance");
     }
+
     abstract void operate();
 }
+
 class AirConditioner extends Appliance implements RemoteControl {
-    public void turnOn() {
-        System.out.println("AC turned ON");
+
+    String mode;
+
+    public AirConditioner(String m) {
+        mode = m;
     }
+
+    public void turnOn() {
+        System.out.println("AC ON");
+    }
+
     void operate() {
-        System.out.println("Cooling started");
+        System.out.println("Mode: " + mode);
     }
 }
+
 public class RemoteControlTest {
     public static void main(String[] args) {
-        AirConditioner ac = new AirConditioner();
-        Appliance.applianceType();  // static method
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter mode: ");
+        String m = sc.next();
+
+        AirConditioner ac = new AirConditioner(m);
+
+        Appliance.applianceType();
         ac.turnOn();
         ac.operate();
     }

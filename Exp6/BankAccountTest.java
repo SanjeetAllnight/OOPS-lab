@@ -1,39 +1,57 @@
 package Exp6;
+import java.util.Scanner;
+
 abstract class BankAccount {
-    protected int accountNumber;
+    protected int acc;
     protected double balance;
+
     public BankAccount(int a, double b) {
-        accountNumber = a;
+        acc = a;
         balance = b;
     }
+
     abstract double computeInterest();
-    public void displayAccountDetails() {
-        System.out.println("Acc: " + accountNumber + " Balance: " + balance);
+
+    public void display() {
+        System.out.println(acc + " " + balance);
     }
 }
+
 class SavingsAccount extends BankAccount {
     public SavingsAccount(int a, double b) {
         super(a, b);
     }
+
     double computeInterest() {
         return balance * 0.05;
     }
 }
+
 class FixedDepositAccount extends BankAccount {
     public FixedDepositAccount(int a, double b) {
         super(a, b);
     }
+
     double computeInterest() {
         return balance * 0.07;
     }
 }
+
 public class BankAccountTest {
     public static void main(String[] args) {
-        BankAccount b1 = new SavingsAccount(1, 10000);
-        BankAccount b2 = new FixedDepositAccount(2, 20000);
-        b1.displayAccountDetails();
-        System.out.println("Interest: " + b1.computeInterest());
-        b2.displayAccountDetails();
-        System.out.println("Interest: " + b2.computeInterest());
+        Scanner sc = new Scanner(System.in);
+
+        BankAccount[] arr = new BankAccount[2];
+
+        System.out.print("Enter acc and balance (Savings): ");
+        arr[0] = new SavingsAccount(sc.nextInt(), sc.nextDouble());
+
+        System.out.print("Enter acc and balance (FD): ");
+        arr[1] = new FixedDepositAccount(sc.nextInt(), sc.nextDouble());
+
+        for(int i=0;i<2;i++) {
+            arr[i].display();
+            System.out.println("Interest: " + arr[i].computeInterest());
+        }
     }
 }

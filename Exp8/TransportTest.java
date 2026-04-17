@@ -1,21 +1,40 @@
 package Exp8;
+import java.util.Scanner;
+
 abstract class Transport {
     abstract void move();
 }
+
 abstract class PublicTransport extends Transport {
     abstract double ticketFare();
 }
+
 class Bus extends PublicTransport {
-    void move() {
-        System.out.println("Bus is moving");
+
+    double fare;
+
+    public Bus(double f) {
+        fare = f;
     }
+
+    void move() {
+        System.out.println("Bus moving");
+    }
+
     double ticketFare() {
-        return 20.0;
+        return fare;
     }
 }
+
 public class TransportTest {
     public static void main(String[] args) {
-        PublicTransport b = new Bus();
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter fare: ");
+        double f = sc.nextDouble();
+
+        PublicTransport b = new Bus(f);
+
         b.move();
         System.out.println("Fare: " + b.ticketFare());
     }

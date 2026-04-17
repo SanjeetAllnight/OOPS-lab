@@ -1,3 +1,14 @@
 {
-    "java.debug.settings.onBuildFailureProceed": true
+    "java.debug.settings.onBuildFailureProceed": true,
+    "java.server.launchMode": "Standard",
+    "java.project.sourcePaths": [
+        "."
+    ],
+    "java.project.outputPath": "bin",
+    "java.project.resourceFilters": [
+        "node_modules",
+        ".git",
+        "bin",
+        ".vscode"
+    ]
 }

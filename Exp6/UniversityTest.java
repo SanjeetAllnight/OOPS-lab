@@ -1,38 +1,61 @@
 package Exp6;
+import java.util.Scanner;
+
 class University {
-    protected String universityName;
+    protected String uname;
     protected String location;
+
     public University(String u, String l) {
-        this.universityName = u;
-        this.location = l;
+        uname = u;
+        location = l;
     }
 }
+
 class Department extends University {
-    protected String departmentName;
-    protected int facultyCount;
+    protected String dname;
+    protected int faculty;
+
     public Department(String u, String l, String d, int f) {
         super(u, l);
-        this.departmentName = d;
-        this.facultyCount = f;
+        dname = d;
+        faculty = f;
     }
 }
+
 class Student extends Department {
-    private int studentId;
+    private int sid;
     private String course;
+
     public Student(String u, String l, String d, int f, int id, String c) {
         super(u, l, d, f);
-        this.studentId = id;
-        this.course = c;
+        sid = id;
+        course = c;
     }
+
     public void display() {
-        System.out.println(universityName + " " + location);
-        System.out.println(departmentName + " Faculty: " + facultyCount);
-        System.out.println("ID: " + studentId + " Course: " + course);
+        System.out.println(uname + " " + location);
+        System.out.println(dname + " " + faculty);
+        System.out.println(sid + " " + course);
     }
 }
+
 public class UniversityTest {
     public static void main(String[] args) {
-        Student s = new Student("SPPU", "Pune", "Comp", 20, 101, "BE");
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter university and location: ");
+        String u = sc.next();
+        String l = sc.next();
+
+        System.out.print("Enter dept and faculty count: ");
+        String d = sc.next();
+        int f = sc.nextInt();
+
+        System.out.print("Enter student id and course: ");
+        int id = sc.nextInt();
+        String c = sc.next();
+
+        Student s = new Student(u, l, d, f, id, c);
         s.display();
     }
 }

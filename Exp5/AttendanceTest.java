@@ -1,45 +1,54 @@
 package Exp5;
+import java.util.Scanner;
+
 class StudentAttendance {
-    private int totalClasses;
-    private int presentClasses;
-    public StudentAttendance() {
-        totalClasses = 0;
-        presentClasses = 0;
+
+    private int total;
+    private int present;
+
+    public void markAttendance(boolean p) {
+        total++;
+        if(p) present++;
     }
-    public void markAttendance(boolean present) {
-        totalClasses++;
-        if (present) {
-            presentClasses++;
-        }
-    }
+
     public double calculateAttendancePercentage() {
-
-        if (totalClasses == 0) return 0;
-
-        return (presentClasses * 100.0) / totalClasses;
+        if(total == 0) return 0;
+        return (present * 100.0) / total;
     }
-    public static double calculateClassAttendance(StudentAttendance[] students) {
+
+    public static double calculateClassAttendance(StudentAttendance[] s) {
         double sum = 0;
-        for (int i = 0; i < students.length; i++) {
-            sum += students[i].calculateAttendancePercentage();
-        }
-        return sum / students.length;
+        for(int i=0;i<s.length;i++)
+            sum += s[i].calculateAttendancePercentage();
+        return sum / s.length;
     }
 }
+
 public class AttendanceTest {
     public static void main(String[] args) {
-        StudentAttendance s1 = new StudentAttendance();
-        StudentAttendance s2 = new StudentAttendance();
-        s1.markAttendance(true);
-        s1.markAttendance(true);
-        s1.markAttendance(false);
-        s2.markAttendance(true);
-        s2.markAttendance(false);
-        s2.markAttendance(false);
-        System.out.println("Student1 %: " + s1.calculateAttendancePercentage());
-        System.out.println("Student2 %: " + s2.calculateAttendancePercentage());
-        StudentAttendance[] arr = {s1, s2};
-        double avg = StudentAttendance.calculateClassAttendance(arr);
-        System.out.println("Class average attendance: " + avg);
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter students: ");
+        int n = sc.nextInt();
+
+        StudentAttendance[] arr = new StudentAttendance[n];
+
+        for(int i=0;i<n;i++) {
+            arr[i] = new StudentAttendance();
+
+            System.out.print("Enter total classes for student " + (i+1) + ": ");
+            int t = sc.nextInt();
+
+            for(int j=0;j<t;j++) {
+                System.out.print("Present? (1/0): ");
+                int p = sc.nextInt();
+                arr[i].markAttendance(p==1);
+            }
+        }
+
+        for(int i=0;i<n;i++)
+            System.out.println("Student " + (i+1) + ": " + arr[i].calculateAttendancePercentage());
+
+        System.out.println("Class avg: " + StudentAttendance.calculateClassAttendance(arr));
     }
 }
