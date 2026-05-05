@@ -1,0 +1,1284 @@
+import java.util.Scanner;
+
+class Student {
+    private int rollNo;
+    private String name;
+    private double marks;
+
+    public void setDetails(int rollNo, String name, double marks) {
+        this.rollNo = rollNo;
+        this.name = name;
+        this.marks = marks;
+    }
+
+    public int getRollNo() {
+        return rollNo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getMarks() {
+        return marks;
+    }
+}
+
+public class StudentRecord {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of students: ");
+        int n = sc.nextInt();
+
+        Student[] students = new Student[n];
+        double total = 0;
+
+        for (int i = 0; i < n; i++) {
+            students[i] = new Student();
+
+            System.out.println("Enter details for student " + (i + 1));
+            System.out.print("Roll No: ");
+            int roll = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Name: ");
+            String name = sc.nextLine();
+
+            System.out.print("Marks: ");
+            double marks = sc.nextDouble();
+
+            students[i].setDetails(roll, name, marks);
+            total += marks;
+        }
+
+        System.out.println("\nStudent Details:");
+        for (Student s : students) {
+            System.out.println("Roll No: " + s.getRollNo() +
+                    ", Name: " + s.getName() +
+                    ", Marks: " + s.getMarks());
+        }
+
+        System.out.println("Average Marks: " + (total / n));
+        sc.close();
+    }
+}
+
+import java.util.Scanner;
+
+class Employee {
+    private int empId;
+    private String name;
+    private double basicSalary;
+
+    public void setDetails(int empId, String name, double basicSalary) {
+        this.empId = empId;
+        this.name = name;
+        this.basicSalary = basicSalary;
+    }
+
+    public double calculateGrossSalary() {
+        double allowance = basicSalary * 0.2;
+        return basicSalary + allowance;
+    }
+
+    public void display() {
+        System.out.println("ID: " + empId +
+                ", Name: " + name +
+                ", Gross Salary: " + calculateGrossSalary());
+    }
+}
+
+public class EmployeeSalary {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of employees: ");
+        int n = sc.nextInt();
+
+        Employee[] employees = new Employee[n];
+
+        for (int i = 0; i < n; i++) {
+            employees[i] = new Employee();
+
+            System.out.println("Enter details for employee " + (i + 1));
+            System.out.print("Employee ID: ");
+            int id = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Name: ");
+            String name = sc.nextLine();
+
+            System.out.print("Basic Salary: ");
+            double salary = sc.nextDouble();
+
+            employees[i].setDetails(id, name, salary);
+        }
+
+        System.out.println("\nEmployee Details:");
+        for (Employee e : employees) {
+            e.display();
+        }
+
+        sc.close();
+    }
+}
+
+import java.util.Scanner;
+
+class Book {
+    private int bookId;
+    private String title;
+    private String author;
+    private double price;
+
+    public void setDetails(int bookId, String title, String author, double price) {
+        this.bookId = bookId;
+        this.title = title;
+        this.author = author;
+        this.price = price;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void display() {
+        System.out.println("Book ID: " + bookId +
+                ", Title: " + title +
+                ", Author: " + author +
+                ", Price: " + price);
+    }
+}
+
+public class BookInventory {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of books: ");
+        int n = sc.nextInt();
+
+        Book[] books = new Book[n];
+
+        for (int i = 0; i < n; i++) {
+            books[i] = new Book();
+
+            System.out.println("Enter details for book " + (i + 1));
+            System.out.print("Book ID: ");
+            int id = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Title: ");
+            String title = sc.nextLine();
+
+            System.out.print("Author: ");
+            String author = sc.nextLine();
+
+            System.out.print("Price: ");
+            double price = sc.nextDouble();
+
+            books[i].setDetails(id, title, author, price);
+        }
+
+        System.out.print("\nEnter minimum price: ");
+        double minPrice = sc.nextDouble();
+
+        System.out.println("Books above given price:");
+        for (Book b : books) {
+            if (b.getPrice() > minPrice) {
+                b.display();
+            }
+        }
+
+        sc.close();
+    }
+}
+
+import java.util.Scanner;
+
+class BankAccount {
+    private int accountNumber;
+    private String holderName;
+    private double balance;
+
+    public void setDetails(int accountNumber, String holderName, double balance) {
+        this.accountNumber = accountNumber;
+        this.holderName = holderName;
+        this.balance = balance;
+    }
+
+    public void deposit(double amount) {
+        balance += amount;
+    }
+
+    public void withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+        } else {
+            System.out.println("Insufficient balance in account " + accountNumber);
+        }
+    }
+
+    public void display() {
+        System.out.println("Account No: " + accountNumber +
+                ", Holder: " + holderName +
+                ", Final Balance: " + balance);
+    }
+}
+
+public class BankAccountDemo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of accounts: ");
+        int n = sc.nextInt();
+
+        BankAccount[] accounts = new BankAccount[n];
+
+        for (int i = 0; i < n; i++) {
+            accounts[i] = new BankAccount();
+
+            System.out.println("Enter details for account " + (i + 1));
+            System.out.print("Account Number: ");
+            int accNo = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Holder Name: ");
+            String name = sc.nextLine();
+
+            System.out.print("Initial Balance: ");
+            double balance = sc.nextDouble();
+
+            accounts[i].setDetails(accNo, name, balance);
+
+            System.out.print("Deposit amount: ");
+            double deposit = sc.nextDouble();
+            accounts[i].deposit(deposit);
+
+            System.out.print("Withdraw amount: ");
+            double withdraw = sc.nextDouble();
+            accounts[i].withdraw(withdraw);
+        }
+
+        System.out.println("\nFinal Account Details:");
+        for (BankAccount acc : accounts) {
+            acc.display();
+        }
+
+        sc.close();
+    }
+}
+
+import java.util.Scanner;
+
+class Product {
+    private int productId;
+    private String name;
+    private double price;
+    private int quantity;
+
+    public void setDetails(int productId, String name, double price, int quantity) {
+        this.productId = productId;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    public double getTotalPrice() {
+        return price * quantity;
+    }
+
+    public void display() {
+        System.out.println("Product ID: " + productId +
+                ", Name: " + name +
+                ", Price: " + price +
+                ", Quantity: " + quantity +
+                ", Total: " + getTotalPrice());
+    }
+}
+
+public class ProductBilling {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of products: ");
+        int n = sc.nextInt();
+
+        Product[] products = new Product[n];
+        double totalBill = 0;
+
+        for (int i = 0; i < n; i++) {
+            products[i] = new Product();
+
+            System.out.println("Enter details for product " + (i + 1));
+            System.out.print("Product ID: ");
+            int id = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Product Name: ");
+            String name = sc.nextLine();
+
+            System.out.print("Price: ");
+            double price = sc.nextDouble();
+
+            System.out.print("Quantity: ");
+            int quantity = sc.nextInt();
+
+            products[i].setDetails(id, name, price, quantity);
+            totalBill += products[i].getTotalPrice();
+        }
+
+        System.out.println("\nProduct Details:");
+        for (Product p : products) {
+            p.display();
+        }
+
+        System.out.println("Total Bill Amount: " + totalBill);
+
+        sc.close();
+    }
+}
+
+b 
+
+import java.util.Scanner;
+
+class Movie {
+    private String movieName;
+    private String director;
+    private double rating;
+
+    public void setDetails(String movieName, String director, double rating) {
+        this.movieName = movieName;
+        this.director = director;
+        this.rating = rating;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void display() {
+        System.out.println("Movie: " + movieName +
+                ", Director: " + director +
+                ", Rating: " + rating);
+    }
+}
+
+public class MovieCollection {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of movies: ");
+        int n = sc.nextInt();
+
+        Movie[] movies = new Movie[n];
+
+        for (int i = 0; i < n; i++) {
+            movies[i] = new Movie();
+
+            sc.nextLine();
+            System.out.println("Enter details for movie " + (i + 1));
+
+            System.out.print("Movie Name: ");
+            String name = sc.nextLine();
+
+            System.out.print("Director: ");
+            String director = sc.nextLine();
+
+            System.out.print("Rating: ");
+            double rating = sc.nextDouble();
+
+            movies[i].setDetails(name, director, rating);
+        }
+
+        System.out.println("\nMovies with rating above 4:");
+        for (Movie m : movies) {
+            if (m.getRating() > 4) {
+                m.display();
+            }
+        }
+
+        sc.close();
+    }
+}
+
+import java.util.Scanner;
+
+class Car {
+    private String model;
+    private double price;
+    private double mileage;
+
+    public void setDetails(String model, double price, double mileage) {
+        this.model = model;
+        this.price = price;
+        this.mileage = mileage;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void display() {
+        System.out.println("Model: " + model +
+                ", Price: " + price +
+                ", Mileage: " + mileage);
+    }
+}
+
+public class CarShowroom {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of cars: ");
+        int n = sc.nextInt();
+
+        Car[] cars = new Car[n];
+
+        for (int i = 0; i < n; i++) {
+            cars[i] = new Car();
+
+            sc.nextLine();
+            System.out.println("Enter details for car " + (i + 1));
+
+            System.out.print("Model: ");
+            String model = sc.nextLine();
+
+            System.out.print("Price: ");
+            double price = sc.nextDouble();
+
+            System.out.print("Mileage: ");
+            double mileage = sc.nextDouble();
+
+            cars[i].setDetails(model, price, mileage);
+        }
+
+        double maxPrice = cars[0].getPrice();
+
+        for (Car c : cars) {
+            if (c.getPrice() > maxPrice) {
+                maxPrice = c.getPrice();
+            }
+        }
+
+        System.out.println("\nMost Expensive Car:");
+        for (Car c : cars) {
+            if (c.getPrice() == maxPrice) {
+                c.display();
+            }
+        }
+
+        sc.close();
+    }
+}
+
+import java.util.Scanner;
+
+class Member {
+    private int memberId;
+    private String name;
+    private int booksIssued;
+
+    public void setDetails(int memberId, String name, int booksIssued) {
+        this.memberId = memberId;
+        this.name = name;
+        this.booksIssued = booksIssued;
+    }
+
+    public int getBooksIssued() {
+        return booksIssued;
+    }
+
+    public void display() {
+        System.out.println("Member ID: " + memberId +
+                ", Name: " + name +
+                ", Books Issued: " + booksIssued);
+    }
+}
+
+public class LibraryMember {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of members: ");
+        int n = sc.nextInt();
+
+        Member[] members = new Member[n];
+
+        for (int i = 0; i < n; i++) {
+            members[i] = new Member();
+
+            System.out.println("Enter details for member " + (i + 1));
+            System.out.print("Member ID: ");
+            int id = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Name: ");
+            String name = sc.nextLine();
+
+            System.out.print("Books Issued: ");
+            int books = sc.nextInt();
+
+            members[i].setDetails(id, name, books);
+        }
+
+        System.out.println("\nMembers who issued more than 3 books:");
+        for (Member m : members) {
+            if (m.getBooksIssued() > 3) {
+                m.display();
+            }
+        }
+
+        sc.close();
+    }
+}
+
+import java.util.Scanner;
+
+class Patient {
+    private int patientId;
+    private String name;
+    private double billAmount;
+
+    public void setDetails(int patientId, String name, double billAmount) {
+        this.patientId = patientId;
+        this.name = name;
+        this.billAmount = billAmount;
+    }
+
+    public double getBillAmount() {
+        return billAmount;
+    }
+
+    public void display() {
+        System.out.println("Patient ID: " + patientId +
+                ", Name: " + name +
+                ", Bill Amount: " + billAmount);
+    }
+}
+
+public class HospitalRecord {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of patients: ");
+        int n = sc.nextInt();
+
+        Patient[] patients = new Patient[n];
+        double totalBill = 0;
+
+        for (int i = 0; i < n; i++) {
+            patients[i] = new Patient();
+
+            System.out.println("Enter details for patient " + (i + 1));
+            System.out.print("Patient ID: ");
+            int id = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Name: ");
+            String name = sc.nextLine();
+
+            System.out.print("Bill Amount: ");
+            double bill = sc.nextDouble();
+
+            patients[i].setDetails(id, name, bill);
+            totalBill += bill;
+        }
+
+        System.out.println("\nPatient Details:");
+        for (Patient p : patients) {
+            p.display();
+        }
+
+        System.out.println("Total Bill Collected: " + totalBill);
+
+        sc.close();
+    }
+}
+
+import java.util.Scanner;
+
+class Mobile {
+    private String brand;
+    private String model;
+    private double price;
+
+    public void setDetails(String brand, String model, double price) {
+        this.brand = brand;
+        this.model = model;
+        this.price = price;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void display() {
+        System.out.println("Brand: " + brand +
+                ", Model: " + model +
+                ", Price: " + price);
+    }
+}
+
+public class MobileStore {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of mobiles: ");
+        int n = sc.nextInt();
+
+        Mobile[] mobiles = new Mobile[n];
+
+        for (int i = 0; i < n; i++) {
+            mobiles[i] = new Mobile();
+
+            sc.nextLine();
+            System.out.println("Enter details for mobile " + (i + 1));
+
+            System.out.print("Brand: ");
+            String brand = sc.nextLine();
+
+            System.out.print("Model: ");
+            String model = sc.nextLine();
+
+            System.out.print("Price: ");
+            double price = sc.nextDouble();
+
+            mobiles[i].setDetails(brand, model, price);
+        }
+
+        System.out.print("\nEnter minimum price: ");
+        double min = sc.nextDouble();
+
+        System.out.print("Enter maximum price: ");
+        double max = sc.nextDouble();
+
+        System.out.println("\nMobiles in given price range:");
+        for (Mobile m : mobiles) {
+            if (m.getPrice() >= min && m.getPrice() <= max) {
+                m.display();
+            }
+        }
+
+        sc.close();
+    }
+}
+
+c 
+
+import java.util.Scanner;
+
+class Rectangle {
+    private double length;
+    private double breadth;
+
+    public void setDimensions(double length, double breadth) {
+        this.length = length;
+        this.breadth = breadth;
+    }
+
+    public double calculateArea() {
+        return length * breadth;
+    }
+
+    public void display() {
+        System.out.println("Length: " + length +
+                ", Breadth: " + breadth +
+                ", Area: " + calculateArea());
+    }
+}
+
+public class RectangleDemo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of rectangles: ");
+        int n = sc.nextInt();
+
+        Rectangle[] rectangles = new Rectangle[n];
+
+        for (int i = 0; i < n; i++) {
+            rectangles[i] = new Rectangle();
+
+            System.out.println("Enter details for rectangle " + (i + 1));
+            System.out.print("Length: ");
+            double length = sc.nextDouble();
+
+            System.out.print("Breadth: ");
+            double breadth = sc.nextDouble();
+
+            rectangles[i].setDimensions(length, breadth);
+        }
+
+        System.out.println("\nRectangle Details:");
+        for (Rectangle r : rectangles) {
+            r.display();
+        }
+
+        sc.close();
+    }
+}
+
+import java.util.Scanner;
+
+class Time {
+    private int hours;
+    private int minutes;
+    private int seconds;
+
+    public void setTime(int hours, int minutes, int seconds) {
+        this.hours = hours;
+        this.minutes = minutes;
+        this.seconds = seconds;
+    }
+
+    public void display() {
+        System.out.printf("%02d:%02d:%02d%n", hours, minutes, seconds);
+    }
+}
+
+public class TimeDemo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of time objects: ");
+        int n = sc.nextInt();
+
+        Time[] times = new Time[n];
+
+        for (int i = 0; i < n; i++) {
+            times[i] = new Time();
+
+            System.out.println("Enter time " + (i + 1));
+            System.out.print("Hours: ");
+            int h = sc.nextInt();
+
+            System.out.print("Minutes: ");
+            int m = sc.nextInt();
+
+            System.out.print("Seconds: ");
+            int s = sc.nextInt();
+
+            times[i].setTime(h, m, s);
+        }
+
+        System.out.println("\nTime Objects:");
+        for (Time t : times) {
+            t.display();
+        }
+
+        sc.close();
+    }
+}
+
+import java.util.Scanner;
+
+class Consumer {
+    private int consumerNo;
+    private String name;
+    private int units;
+
+    public void setDetails(int consumerNo, String name, int units) {
+        this.consumerNo = consumerNo;
+        this.name = name;
+        this.units = units;
+    }
+
+    public double calculateBill() {
+        if (units <= 100) {
+            return units * 2;
+        } else if (units <= 300) {
+            return (100 * 2) + ((units - 100) * 3);
+        } else {
+            return (100 * 2) + (200 * 3) + ((units - 300) * 5);
+        }
+    }
+
+    public void display() {
+        System.out.println("Consumer No: " + consumerNo +
+                ", Name: " + name +
+                ", Units: " + units +
+                ", Bill Amount: " + calculateBill());
+    }
+}
+
+public class ElectricityBill {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of consumers: ");
+        int n = sc.nextInt();
+
+        Consumer[] consumers = new Consumer[n];
+
+        for (int i = 0; i < n; i++) {
+            consumers[i] = new Consumer();
+
+            System.out.println("Enter details for consumer " + (i + 1));
+            System.out.print("Consumer Number: ");
+            int no = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Name: ");
+            String name = sc.nextLine();
+
+            System.out.print("Units Consumed: ");
+            int units = sc.nextInt();
+
+            consumers[i].setDetails(no, name, units);
+        }
+
+        System.out.println("\nElectricity Bill Details:");
+        for (Consumer c : consumers) {
+            c.display();
+        }
+
+        sc.close();
+    }
+}
+
+import java.util.Scanner;
+
+class Teacher {
+    private int id;
+    private String name;
+    private String subject;
+
+    public void setDetails(int id, String name, String subject) {
+        this.id = id;
+        this.name = name;
+        this.subject = subject;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void display() {
+        System.out.println("ID: " + id +
+                ", Name: " + name +
+                ", Subject: " + subject);
+    }
+}
+
+public class TeacherDetails {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of teachers: ");
+        int n = sc.nextInt();
+
+        Teacher[] teachers = new Teacher[n];
+
+        for (int i = 0; i < n; i++) {
+            teachers[i] = new Teacher();
+
+            System.out.println("Enter details for teacher " + (i + 1));
+            System.out.print("Teacher ID: ");
+            int id = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Name: ");
+            String name = sc.nextLine();
+
+            System.out.print("Subject: ");
+            String subject = sc.nextLine();
+
+            teachers[i].setDetails(id, name, subject);
+        }
+
+        sc.nextLine();
+        System.out.print("\nEnter subject to search: ");
+        String searchSubject = sc.nextLine();
+
+        System.out.println("Teachers teaching " + searchSubject + ":");
+        for (Teacher t : teachers) {
+            if (t.getSubject().equalsIgnoreCase(searchSubject)) {
+                t.display();
+            }
+        }
+
+        sc.close();
+    }
+}
+
+import java.util.Scanner;
+
+class Laptop {
+    private String brand;
+    private int ram;
+    private double price;
+
+    public void setDetails(String brand, int ram, double price) {
+        this.brand = brand;
+        this.ram = ram;
+        this.price = price;
+    }
+
+    public int getRam() {
+        return ram;
+    }
+
+    public void display() {
+        System.out.println("Brand: " + brand +
+                ", RAM: " + ram + " GB" +
+                ", Price: " + price);
+    }
+}
+
+public class LaptopStore {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of laptops: ");
+        int n = sc.nextInt();
+
+        Laptop[] laptops = new Laptop[n];
+
+        for (int i = 0; i < n; i++) {
+            laptops[i] = new Laptop();
+
+            sc.nextLine();
+            System.out.println("Enter details for laptop " + (i + 1));
+
+            System.out.print("Brand: ");
+            String brand = sc.nextLine();
+
+            System.out.print("RAM (GB): ");
+            int ram = sc.nextInt();
+
+            System.out.print("Price: ");
+            double price = sc.nextDouble();
+
+            laptops[i].setDetails(brand, ram, price);
+        }
+
+        System.out.println("\nLaptops with RAM greater than 8 GB:");
+        for (Laptop l : laptops) {
+            if (l.getRam() > 8) {
+                l.display();
+            }
+        }
+
+        sc.close();
+    }
+}
+
+d 
+
+import java.util.Scanner;
+
+class SavingsAccount {
+    private int accountNumber;
+    private String name;
+    private double balance;
+
+    public void setDetails(int accountNumber, String name, double balance) {
+        this.accountNumber = accountNumber;
+        this.name = name;
+        this.balance = balance;
+    }
+
+    public void applyInterest() {
+        balance += balance * 0.05; // 5% interest
+    }
+
+    public void display() {
+        System.out.println("Account No: " + accountNumber +
+                ", Name: " + name +
+                ", Updated Balance: " + balance);
+    }
+}
+
+public class SavingsAccountDemo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of accounts: ");
+        int n = sc.nextInt();
+
+        SavingsAccount[] accounts = new SavingsAccount[n];
+
+        for (int i = 0; i < n; i++) {
+            accounts[i] = new SavingsAccount();
+
+            System.out.println("Enter details for account " + (i + 1));
+            System.out.print("Account Number: ");
+            int accNo = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Name: ");
+            String name = sc.nextLine();
+
+            System.out.print("Balance: ");
+            double balance = sc.nextDouble();
+
+            accounts[i].setDetails(accNo, name, balance);
+            accounts[i].applyInterest();
+        }
+
+        System.out.println("\nUpdated Account Details:");
+        for (SavingsAccount acc : accounts) {
+            acc.display();
+        }
+
+        sc.close();
+    }
+}
+
+import java.util.Scanner;
+
+class Player {
+    private String name;
+    private int runs;
+
+    public void setDetails(String name, int runs) {
+        this.name = name;
+        this.runs = runs;
+    }
+
+    public int getRuns() {
+        return runs;
+    }
+
+    public void display() {
+        System.out.println("Player: " + name + ", Runs: " + runs);
+    }
+}
+
+public class CricketStats {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of players: ");
+        int n = sc.nextInt();
+
+        Player[] players = new Player[n];
+
+        for (int i = 0; i < n; i++) {
+            players[i] = new Player();
+
+            sc.nextLine();
+            System.out.println("Enter details for player " + (i + 1));
+
+            System.out.print("Name: ");
+            String name = sc.nextLine();
+
+            System.out.print("Runs Scored: ");
+            int runs = sc.nextInt();
+
+            players[i].setDetails(name, runs);
+        }
+
+        int maxRuns = players[0].getRuns();
+
+        for (Player p : players) {
+            if (p.getRuns() > maxRuns) {
+                maxRuns = p.getRuns();
+            }
+        }
+
+        System.out.println("\nPlayer(s) with Highest Score:");
+        for (Player p : players) {
+            if (p.getRuns() == maxRuns) {
+                p.display();
+            }
+        }
+
+        sc.close();
+    }
+}
+
+import java.util.Scanner;
+
+class Course {
+    private int courseId;
+    private String courseName;
+    private double fee;
+
+    public void setDetails(int courseId, String courseName, double fee) {
+        this.courseId = courseId;
+        this.courseName = courseName;
+        this.fee = fee;
+    }
+
+    public double getFee() {
+        return fee;
+    }
+
+    public void display() {
+        System.out.println("Course ID: " + courseId +
+                ", Course Name: " + courseName +
+                ", Fee: " + fee);
+    }
+}
+
+public class CourseEnrollment {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of courses: ");
+        int n = sc.nextInt();
+
+        Course[] courses = new Course[n];
+        double totalFee = 0;
+
+        for (int i = 0; i < n; i++) {
+            courses[i] = new Course();
+
+            System.out.println("Enter details for course " + (i + 1));
+            System.out.print("Course ID: ");
+            int id = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Course Name: ");
+            String name = sc.nextLine();
+
+            System.out.print("Fee: ");
+            double fee = sc.nextDouble();
+
+            courses[i].setDetails(id, name, fee);
+            totalFee += fee;
+        }
+
+        System.out.println("\nCourse Details:");
+        for (Course c : courses) {
+            c.display();
+        }
+
+        System.out.println("Total Fees of all Courses: " + totalFee);
+
+        sc.close();
+    }
+}
+
+import java.util.Scanner;
+
+class Room {
+    private int roomNumber;
+    private String type;
+    private double rent;
+
+    public void setDetails(int roomNumber, String type, double rent) {
+        this.roomNumber = roomNumber;
+        this.type = type;
+        this.rent = rent;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void display() {
+        System.out.println("Room No: " + roomNumber +
+                ", Type: " + type +
+                ", Rent: " + rent);
+    }
+}
+
+public class HotelBooking {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of rooms: ");
+        int n = sc.nextInt();
+
+        Room[] rooms = new Room[n];
+
+        for (int i = 0; i < n; i++) {
+            rooms[i] = new Room();
+
+            System.out.println("Enter details for room " + (i + 1));
+            System.out.print("Room Number: ");
+            int no = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Room Type: ");
+            String type = sc.nextLine();
+
+            System.out.print("Rent: ");
+            double rent = sc.nextDouble();
+
+            rooms[i].setDetails(no, type, rent);
+        }
+
+        sc.nextLine();
+        System.out.print("\nEnter room type to search: ");
+        String searchType = sc.nextLine();
+
+        System.out.println("Available rooms of type " + searchType + ":");
+        for (Room r : rooms) {
+            if (r.getType().equalsIgnoreCase(searchType)) {
+                r.display();
+            }
+        }
+
+        sc.close();
+    }
+}
+
+import java.util.Scanner;
+
+class Item {
+    private String itemName;
+    private double price;
+    private int quantity;
+
+    public void setDetails(String itemName, double price, int quantity) {
+        this.itemName = itemName;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    public double getTotalCost() {
+        return price * quantity;
+    }
+
+    public void display() {
+        System.out.println("Item: " + itemName +
+                ", Price: " + price +
+                ", Quantity: " + quantity +
+                ", Total: " + getTotalCost());
+    }
+}
+
+public class ShoppingCart {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of items: ");
+        int n = sc.nextInt();
+
+        Item[] items = new Item[n];
+        double totalCost = 0;
+
+        for (int i = 0; i < n; i++) {
+            items[i] = new Item();
+
+            sc.nextLine();
+            System.out.println("Enter details for item " + (i + 1));
+
+            System.out.print("Item Name: ");
+            String name = sc.nextLine();
+
+            System.out.print("Price: ");
+            double price = sc.nextDouble();
+
+            System.out.print("Quantity: ");
+            int quantity = sc.nextInt();
+
+            items[i].setDetails(name, price, quantity);
+            totalCost += items[i].getTotalCost();
+        }
+
+        System.out.println("\nShopping Cart Details:");
+        for (Item item : items) {
+            item.display();
+        }
+
+        System.out.println("Total Shopping Cost: " + totalCost);
+
+        sc.close();
+    }
+}

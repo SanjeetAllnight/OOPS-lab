@@ -1,27 +1,44 @@
 package Exp5;
+import java.util.Scanner;
+
 class SavingsAccount {
+
     private double balance;
-    private static double interestRate = 5;
+    private static double rate = 5;
+
     public SavingsAccount(double b) {
         balance = b;
     }
+
     public double calculateInterest() {
-        double interest = balance * interestRate / 100;
-        return interest;
+        return balance * rate / 100;
     }
-    public static void updateInterestRate(double newRate) {
-        interestRate = newRate;
+
+    public static void updateInterestRate(double r) {
+        rate = r;
     }
 }
+
 public class SavingsTest {
     public static void main(String[] args) {
-        SavingsAccount a1 = new SavingsAccount(1000);
-        SavingsAccount a2 = new SavingsAccount(2000);
-        System.out.println("Interest a1: " + a1.calculateInterest());
-        System.out.println("Interest a2: " + a2.calculateInterest());
-        SavingsAccount.updateInterestRate(7);
-        System.out.println("After rate change");
-        System.out.println("Interest a1: " + a1.calculateInterest());
-        System.out.println("Interest a2: " + a2.calculateInterest());
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter accounts: ");
+        int n = sc.nextInt();
+
+        SavingsAccount[] arr = new SavingsAccount[n];
+
+        for(int i=0;i<n;i++) {
+            System.out.print("Enter balance: ");
+            double b = sc.nextDouble();
+            arr[i] = new SavingsAccount(b);
+        }
+
+        System.out.print("Enter new interest rate: ");
+        double r = sc.nextDouble();
+        SavingsAccount.updateInterestRate(r);
+
+        for(int i=0;i<n;i++)
+            System.out.println("Interest: " + arr[i].calculateInterest());
     }
 }

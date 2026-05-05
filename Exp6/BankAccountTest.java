@@ -41,15 +41,24 @@ public class BankAccountTest {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        BankAccount[] arr = new BankAccount[2];
+        System.out.print("Enter number of bank accounts: ");
+        int n = sc.nextInt();
 
-        System.out.print("Enter acc and balance (Savings): ");
-        arr[0] = new SavingsAccount(sc.nextInt(), sc.nextDouble());
+        BankAccount[] arr = new BankAccount[n];
 
-        System.out.print("Enter acc and balance (FD): ");
-        arr[1] = new FixedDepositAccount(sc.nextInt(), sc.nextDouble());
+        for(int i=0;i<n;i++) {
+            System.out.print("Enter account type (1-Savings 2-Fixed Deposit): ");
+            int type = sc.nextInt();
 
-        for(int i=0;i<2;i++) {
+            System.out.print("Enter acc and balance: ");
+            if (type == 1) {
+                arr[i] = new SavingsAccount(sc.nextInt(), sc.nextDouble());
+            } else {
+                arr[i] = new FixedDepositAccount(sc.nextInt(), sc.nextDouble());
+            }
+        }
+
+        for(int i=0;i<n;i++) {
             arr[i].display();
             System.out.println("Interest: " + arr[i].computeInterest());
         }

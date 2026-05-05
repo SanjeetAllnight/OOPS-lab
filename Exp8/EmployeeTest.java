@@ -1,6 +1,5 @@
 package Exp8;
 import java.util.Scanner;
-
 abstract class Employee {
     protected String name;
     protected int id;
@@ -16,7 +15,6 @@ abstract class Employee {
         System.out.println(name + " " + id);
     }
 }
-
 class Manager extends Employee {
     private double bonus;
 
@@ -24,12 +22,10 @@ class Manager extends Employee {
         super(n, i);
         bonus = b;
     }
-
     double calculateSalary() {
         return 50000 + bonus;
     }
 }
-
 class Developer extends Employee {
     private int hours;
 
@@ -70,7 +66,6 @@ public class EmployeeTest {
                 arr[i] = new Developer(name, id, h);
             }
         }
-
         for(int i=0;i<n;i++) {
             arr[i].displayDetails();
             System.out.println("Salary: " + arr[i].calculateSalary());
