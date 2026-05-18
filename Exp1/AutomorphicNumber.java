@@ -1,3 +1,4 @@
+package Exp1;
 import java.util.Scanner;
 
 public class AutomorphicNumber {
