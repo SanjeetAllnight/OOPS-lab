@@ -2,6 +2,7 @@ package Exp13;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.JTableHeader;
@@ -160,7 +161,7 @@ public class ImageGallery extends JFrame implements ActionListener {
 
         nextBtn.addActionListener(this);
 
-        detailsLabel = new JLabel("Currently Showing: Image 1", JLabel.RIGHT);
+        detailsLabel = new JLabel("", JLabel.RIGHT);
 
         detailsLabel.setFont(
             new Font("Segoe UI", Font.BOLD, 15)
@@ -181,6 +182,8 @@ public class ImageGallery extends JFrame implements ActionListener {
         bottomPanel.add(detailsLabel, BorderLayout.EAST);
 
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+
+        updateDetails();
 
         setVisible(true);
     }
@@ -213,6 +216,21 @@ public class ImageGallery extends JFrame implements ActionListener {
         imageLabel.setIcon(new ImageIcon(img));
     }
 
+    public void updateDetails() {
+
+        ImageIcon icon = new ImageIcon(imagePaths[current]);
+
+        File imageFile = new File(imagePaths[current]);
+
+        long sizeInKb = Math.max(1, imageFile.length() / 1024);
+
+        detailsLabel.setText(
+            data[current][0] + " | Resolution: " +
+            icon.getIconWidth() + "x" + icon.getIconHeight() +
+            " | Size: " + sizeInKb + " KB"
+        );
+    }
+
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == nextBtn) {
@@ -233,9 +251,7 @@ public class ImageGallery extends JFrame implements ActionListener {
 
         loadImage();
 
-        detailsLabel.setText(
-            "Currently Showing: " + data[current][0]
-        );
+        updateDetails();
     }
 
     public static void main(String[] args) {
