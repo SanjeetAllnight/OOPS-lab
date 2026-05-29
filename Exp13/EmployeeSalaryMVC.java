@@ -10,14 +10,16 @@ class EmployeeModel {
     private String name;
     private String department;
     private String type;
+    private double basicSalary;
     private double salary;
 
     public EmployeeModel() {}
 
-    public EmployeeModel(String name, String department, String type) {
+    public EmployeeModel(String name, String department, String type, double basicSalary) {
         this.name = name;
         this.department = department;
         this.type = type;
+        this.basicSalary = basicSalary;
     }
 
     public void setName(String name) {
@@ -32,6 +34,10 @@ class EmployeeModel {
         this.type = type;
     }
 
+    public void setBasicSalary(double basicSalary) {
+        this.basicSalary = basicSalary;
+    }
+
     public String getName() {
         return name;
     }
@@ -44,26 +50,30 @@ class EmployeeModel {
         return type;
     }
 
+    public double getBasicSalary() {
+        return basicSalary;
+    }
+
     public double calculateSalary() {
 
-        double base = 30000;
+        double allowancePercent;
 
         if (department.equals("IT"))
-            base += 15000;
+            allowancePercent = 0.10;
 
         else if (department.equals("HR"))
-            base += 8000;
+            allowancePercent = 0.08;
 
         else
-            base += 10000;
+            allowancePercent = 0.06;
 
         if (type.equals("Full Time"))
-            base += 10000;
+            allowancePercent += 0.05;
 
         else
-            base += 3000;
+            allowancePercent += 0.02;
 
-        salary = base;
+        salary = basicSalary + (basicSalary * allowancePercent);
 
         return salary;
     }
@@ -72,6 +82,7 @@ class EmployeeModel {
 class EmployeeView extends JFrame {
 
     JTextField txtName;
+    JTextField txtBasicSalary;
 
     JComboBox<String> comboDept;
 
@@ -86,57 +97,102 @@ class EmployeeView extends JFrame {
 
         setTitle("Employee Salary Calculator");
 
-        setSize(500, 350);
+        setSize(620, 460);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         setLocationRelativeTo(null);
 
-        setLayout(new BorderLayout(10,10));
+        setResizable(false);
 
-        JPanel northPanel = new JPanel();
+        JPanel mainPanel = new JPanel(new BorderLayout(0, 22));
+
+        mainPanel.setBackground(new Color(245, 247, 251));
+
+        mainPanel.setBorder(new EmptyBorder(26, 34, 26, 34));
+
+        setContentPane(mainPanel);
+
+        JPanel northPanel = new JPanel(new BorderLayout());
+
+        northPanel.setOpaque(false);
 
         JLabel title = new JLabel("Employee Salary Calculator");
 
-        title.setFont(new Font("Arial", Font.BOLD, 24));
+        title.setFont(new Font("Segoe UI", Font.BOLD, 26));
 
-        northPanel.add(title);
+        title.setForeground(new Color(31, 41, 55));
 
-        add(northPanel, BorderLayout.NORTH);
+        JLabel subtitle = new JLabel("Enter employee details to calculate the final salary");
 
-        JPanel centerPanel = new JPanel();
+        subtitle.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 
-        centerPanel.setLayout(new GridLayout(4,2,10,10));
+        subtitle.setForeground(new Color(100, 116, 139));
 
-        centerPanel.setBorder(new EmptyBorder(20,20,20,20));
+        northPanel.add(title, BorderLayout.NORTH);
 
-        JLabel lblName = new JLabel("Employee Name:");
+        northPanel.add(subtitle, BorderLayout.SOUTH);
+
+        mainPanel.add(northPanel, BorderLayout.NORTH);
+
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+
+        centerPanel.setBackground(Color.WHITE);
+
+        centerPanel.setBorder(
+            BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(226, 232, 240)),
+                new EmptyBorder(24, 26, 24, 26)
+            )
+        );
+
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.insets = new Insets(8, 0, 8, 0);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        gbc.gridy = 0;
+
+        JLabel lblName = createLabel("Employee Name");
 
         txtName = new JTextField();
 
-        txtName.setPreferredSize(new Dimension(150,30));
+        styleInput(txtName);
 
-        txtName.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        JLabel lblBasicSalary = createLabel("Basic Salary");
 
-        txtName.setOpaque(true);
+        txtBasicSalary = new JTextField();
 
-        JLabel lblDept = new JLabel("Department:");
+        styleInput(txtBasicSalary);
+
+        JLabel lblDept = createLabel("Department");
 
         String[] depts = {"IT","HR","Sales"};
 
         comboDept = new JComboBox<>(depts);
 
-        comboDept.setPreferredSize(new Dimension(150,30));
+        comboDept.setPreferredSize(new Dimension(260, 36));
 
-        comboDept.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        comboDept.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 
-        JLabel lblType = new JLabel("Employment Type:");
+        comboDept.setBackground(Color.WHITE);
 
-        JPanel radioPanel = new JPanel();
+        comboDept.setBorder(BorderFactory.createLineBorder(new Color(203, 213, 225)));
+
+        JLabel lblType = createLabel("Employment Type");
+
+        JPanel radioPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 12, 0));
+
+        radioPanel.setOpaque(false);
 
         fullTime = new JRadioButton("Full Time");
 
         partTime = new JRadioButton("Part Time");
+
+        styleRadio(fullTime);
+
+        styleRadio(partTime);
 
         ButtonGroup bg = new ButtonGroup();
 
@@ -150,31 +206,38 @@ class EmployeeView extends JFrame {
 
         radioPanel.add(partTime);
 
-        lblResult = new JLabel("Salary will appear here");
+        lblResult = new JLabel("Salary will appear here", JLabel.CENTER);
 
-        lblResult.setForeground(Color.BLUE);
+        lblResult.setForeground(new Color(21, 128, 61));
 
-        lblResult.setFont(new Font("Verdana", Font.BOLD, 16));
+        lblResult.setFont(new Font("Segoe UI", Font.BOLD, 15));
 
-        centerPanel.add(lblName);
+        lblResult.setOpaque(true);
 
-        centerPanel.add(txtName);
+        lblResult.setBackground(new Color(240, 253, 244));
 
-        centerPanel.add(lblDept);
+        lblResult.setBorder(
+            BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(187, 247, 208)),
+                new EmptyBorder(8, 12, 8, 12)
+            )
+        );
 
-        centerPanel.add(comboDept);
+        addFormRow(centerPanel, gbc, lblName, txtName);
 
-        centerPanel.add(lblType);
+        addFormRow(centerPanel, gbc, lblBasicSalary, txtBasicSalary);
 
-        centerPanel.add(radioPanel);
+        addFormRow(centerPanel, gbc, lblDept, comboDept);
 
-        centerPanel.add(new JLabel("Result:"));
+        addFormRow(centerPanel, gbc, lblType, radioPanel);
 
-        centerPanel.add(lblResult);
+        addFormRow(centerPanel, gbc, createLabel("Result"), lblResult);
 
-        add(centerPanel, BorderLayout.CENTER);
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
 
-        JPanel southPanel = new JPanel();
+        JPanel southPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0));
+
+        southPanel.setOpaque(false);
 
         btnCalc = new JButton("Calculate Salary");
 
@@ -182,13 +245,82 @@ class EmployeeView extends JFrame {
 
         btnCalc.setToolTipText("Click to calculate salary");
 
-        btnCalc.setPreferredSize(new Dimension(180,40));
+        btnCalc.setPreferredSize(new Dimension(190,42));
+
+        btnCalc.setFont(new Font("Segoe UI", Font.BOLD, 14));
+
+        btnCalc.setForeground(Color.WHITE);
+
+        btnCalc.setBackground(new Color(37, 99, 235));
+
+        btnCalc.setFocusPainted(false);
+
+        btnCalc.setBorder(BorderFactory.createEmptyBorder(10, 18, 10, 18));
 
         southPanel.add(btnCalc);
 
-        add(southPanel, BorderLayout.SOUTH);
+        mainPanel.add(southPanel, BorderLayout.SOUTH);
 
         setVisible(true);
+    }
+
+    private JLabel createLabel(String text) {
+
+        JLabel label = new JLabel(text);
+
+        label.setFont(new Font("Segoe UI", Font.BOLD, 14));
+
+        label.setForeground(new Color(51, 65, 85));
+
+        return label;
+    }
+
+    private void styleInput(JTextField field) {
+
+        field.setPreferredSize(new Dimension(260, 36));
+
+        field.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+
+        field.setBorder(
+            BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(203, 213, 225)),
+                new EmptyBorder(6, 10, 6, 10)
+            )
+        );
+
+        field.setOpaque(true);
+    }
+
+    private void styleRadio(JRadioButton radioButton) {
+
+        radioButton.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+
+        radioButton.setForeground(new Color(51, 65, 85));
+
+        radioButton.setOpaque(false);
+    }
+
+    private void addFormRow(JPanel panel, GridBagConstraints gbc, JLabel label, JComponent field) {
+
+        gbc.gridx = 0;
+
+        gbc.weightx = 0;
+
+        gbc.anchor = GridBagConstraints.WEST;
+
+        panel.add(label, gbc);
+
+        gbc.gridx = 1;
+
+        gbc.weightx = 1;
+
+        gbc.insets = new Insets(8, 28, 8, 0);
+
+        panel.add(field, gbc);
+
+        gbc.insets = new Insets(8, 0, 8, 0);
+
+        gbc.gridy++;
     }
 }
 
@@ -213,6 +345,8 @@ class EmployeeController implements ActionListener {
 
             String name = view.txtName.getText();
 
+            double basicSalary = Double.parseDouble(view.txtBasicSalary.getText());
+
             String dept = (String)view.comboDept.getSelectedItem();
 
             String type;
@@ -229,12 +363,21 @@ class EmployeeController implements ActionListener {
 
             model.setType(type);
 
+            model.setBasicSalary(basicSalary);
+
             double sal = model.calculateSalary();
 
             view.lblResult.setText("Rs. " + sal);
 
             view.txtName.setText("");
 
+            view.txtBasicSalary.setText("");
+
+        }
+
+        catch(NumberFormatException ex) {
+
+            JOptionPane.showMessageDialog(view,"Please enter a valid basic salary");
         }
 
         catch(Exception ex) {

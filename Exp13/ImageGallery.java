@@ -3,7 +3,8 @@ package Exp13;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.JTableHeader;
 
 public class ImageGallery extends JFrame implements ActionListener {
 
@@ -16,9 +17,9 @@ public class ImageGallery extends JFrame implements ActionListener {
     JTable table;
 
     String[] imagePaths = {
-        "Exp13/img1.jpg",
-        "Exp13/img2.jpg",
-        "Exp13/img3.jpg"
+        "Exp13/1288367.jpg",
+        "Exp13/1312123.jpg",
+        "Exp13/archbtw.png"
     };
 
     String[][] data = {
@@ -33,13 +34,13 @@ public class ImageGallery extends JFrame implements ActionListener {
 
         setTitle("Image Gallery");
 
-        setSize(700,600);
+        setSize(760,640);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         setLocationRelativeTo(null);
 
-        setLayout(new BorderLayout(10,10));
+        setResizable(false);
 
         try {
 
@@ -51,39 +52,101 @@ public class ImageGallery extends JFrame implements ActionListener {
 
         catch(Exception e) {}
 
-        JPanel topPanel = new JPanel();
+        JPanel mainPanel = new JPanel(new BorderLayout(0, 18));
+
+        mainPanel.setBackground(new Color(245, 247, 251));
+
+        mainPanel.setBorder(new EmptyBorder(24, 28, 24, 28));
+
+        setContentPane(mainPanel);
+
+        JLabel title = new JLabel("Image Gallery");
+
+        title.setFont(new Font("Segoe UI", Font.BOLD, 28));
+
+        title.setForeground(new Color(31, 41, 55));
+
+        mainPanel.add(title, BorderLayout.NORTH);
+
+        JPanel topPanel = new JPanel(new BorderLayout());
+
+        topPanel.setBackground(Color.WHITE);
 
         topPanel.setBorder(
-            new TitledBorder("Gallery")
+            BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(226, 232, 240)),
+                new EmptyBorder(18, 18, 18, 18)
+            )
         );
 
         imageLabel = new JLabel();
 
         imageLabel.setHorizontalAlignment(JLabel.CENTER);
 
+        imageLabel.setPreferredSize(new Dimension(680, 300));
+
+        imageLabel.setOpaque(true);
+
+        imageLabel.setBackground(new Color(15, 23, 42));
+
         loadImage();
 
-        topPanel.add(imageLabel);
+        topPanel.add(imageLabel, BorderLayout.CENTER);
 
-        add(topPanel, BorderLayout.NORTH);
+        JPanel centerPanel = new JPanel(new BorderLayout(0, 16));
+
+        centerPanel.setOpaque(false);
+
+        centerPanel.add(topPanel, BorderLayout.NORTH);
 
         String[] cols = {"Image Name","Resolution","Size"};
 
         table = new JTable(data, cols);
 
+        table.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+
+        table.setRowHeight(30);
+
+        table.setGridColor(new Color(226, 232, 240));
+
+        table.setSelectionBackground(new Color(219, 234, 254));
+
+        table.setSelectionForeground(new Color(30, 64, 175));
+
+        table.setFillsViewportHeight(true);
+
+        JTableHeader tableHeader = table.getTableHeader();
+
+        tableHeader.setFont(new Font("Segoe UI", Font.BOLD, 14));
+
+        tableHeader.setForeground(new Color(51, 65, 85));
+
+        tableHeader.setBackground(new Color(241, 245, 249));
+
         JScrollPane jsp = new JScrollPane(table);
 
         jsp.setBorder(
-            BorderFactory.createTitledBorder("Image Details")
+            BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(226, 232, 240)),
+                new EmptyBorder(0, 0, 0, 0)
+            )
         );
 
-        add(jsp, BorderLayout.CENTER);
+        centerPanel.add(jsp, BorderLayout.CENTER);
 
-        JPanel bottomPanel = new JPanel();
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
+
+        JPanel bottomPanel = new JPanel(new BorderLayout());
+
+        bottomPanel.setOpaque(false);
 
         prevBtn = new JButton("Previous");
 
         nextBtn = new JButton("Next");
+
+        styleButton(prevBtn);
+
+        styleButton(nextBtn);
 
         prevBtn.setMnemonic('P');
 
@@ -97,21 +160,44 @@ public class ImageGallery extends JFrame implements ActionListener {
 
         nextBtn.addActionListener(this);
 
-        detailsLabel = new JLabel("Currently Showing: Image 1");
+        detailsLabel = new JLabel("Currently Showing: Image 1", JLabel.RIGHT);
 
         detailsLabel.setFont(
-            new Font("Arial", Font.BOLD, 16)
+            new Font("Segoe UI", Font.BOLD, 15)
         );
 
-        bottomPanel.add(prevBtn);
+        detailsLabel.setForeground(new Color(51, 65, 85));
 
-        bottomPanel.add(nextBtn);
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
 
-        bottomPanel.add(detailsLabel);
+        buttonPanel.setOpaque(false);
 
-        add(bottomPanel, BorderLayout.SOUTH);
+        buttonPanel.add(prevBtn);
+
+        buttonPanel.add(nextBtn);
+
+        bottomPanel.add(buttonPanel, BorderLayout.WEST);
+
+        bottomPanel.add(detailsLabel, BorderLayout.EAST);
+
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
         setVisible(true);
+    }
+
+    private void styleButton(JButton button) {
+
+        button.setPreferredSize(new Dimension(120, 38));
+
+        button.setFont(new Font("Segoe UI", Font.BOLD, 14));
+
+        button.setForeground(Color.WHITE);
+
+        button.setBackground(new Color(37, 99, 235));
+
+        button.setFocusPainted(false);
+
+        button.setBorder(BorderFactory.createEmptyBorder(8, 16, 8, 16));
     }
 
     public void loadImage() {
