@@ -62,9 +62,23 @@ public class EmployeeTest {
             String name = sc.next();
             double sal = sc.nextDouble();
 
-            if(t==1) arr[i] = new Developer(name, sal);
-            else if(t==2) arr[i] = new Manager(name, sal);
-            else arr[i] = new Intern(name, sal);
+            switch (t) {
+                case 1:
+                    arr[i]= new Developer(name, sal);
+                    break;
+
+                case 2:
+                    arr[i] = new Manager(name, sal);
+                    break;
+                
+                case 3:
+                    arr[i]= new Intern(name, sal);
+                    break;
+
+                default:
+                    System.out.println("Invalide Type!");
+                    break;
+            }
         }
 
        for (Employee e : arr){
