@@ -10,5 +10,11 @@
         ".git",
         "bin",
         ".vscode"
-    ]
+    ],
+    "editor.inlineSuggest.edits.showLongDistanceHint": false,
+    "editor.inlineSuggest.enabled": false,
+    "editor.inlineSuggest.suppressInSnippetMode": false,
+    "editor.inlineSuggest.syntaxHighlightingEnabled": false,
+    "editor.screenReaderAnnounceInlineSuggestion": false,
+    "github.copilot.chat.languageContext.typescript.enabled": false
 }

@@ -67,8 +67,8 @@ public class EmployeeTest {
             else arr[i] = new Intern(name, sal);
         }
 
-        for(int i=0;i<n;i++) {
-            System.out.println(arr[i].name + " Salary: " + arr[i].calculateSalary());
-        }
+       for (Employee e : arr){
+        System.out.println("name:" + e.name + "Salary: " + e.calculateSalary());
+       }
     }
 }
